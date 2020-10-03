@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.util.*;
-
+//****樂透****
 public class problem1Q2
 {
     public static void main(String[] args) throws FileNotFoundException,java.io.IOException//小林的
@@ -20,7 +20,7 @@ public class problem1Q2
             String FileName = String.format("in%s.txt", i);
             File file=new File(FileName);
             Scanner input=new Scanner(file);
-            input.useDelimiter("(\\s|,|\\n)+");
+            input.useDelimiter("(\\s|,|\\n)+");//把所有符號含空格換行切割 使數字連續 作用範圍-整個檔案
             int n1 = Integer.parseInt(input.next());
             for(j=0;j<n1;j++)
             {
@@ -29,7 +29,7 @@ public class problem1Q2
                 for(k=0;k<n2;k++)
                 {
                     m = Integer.parseInt(input.next());
-                    Number[m] = Number[m]+1;
+                    Number[m] = Number[m]+1;//儲存出現頻率
                 }
                 int maxindex = 1;
                 int max = Number[1];
