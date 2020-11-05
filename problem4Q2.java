@@ -28,7 +28,24 @@ public class problem4Q2 {
                     num++;
                 }
             }
-            Shun(TestData);//if ans==true 判斷tonghuashun
+            if(Shun(TestData)==true) {//if ans==true 判斷tonghuashun
+
+              if( TongHuaShun(TestData)==true){
+                  System.out.println("同花順");
+              }else {
+                  System.out.println("順子");
+              }
+            }
+            char Ans=Apair(TestData);
+            if(Ans!=0) {
+                if (Ans == 'A') {
+                    System.out.println("四條");
+                } else if (Ans == 'B') {
+                    System.out.println("三條");
+                } else {
+                    System.out.println("一對");
+                }
+            }
             testGroup--;
         }
 
@@ -37,23 +54,24 @@ public class problem4Q2 {
 
     public static boolean Shun(int [] data)
     {
+        int [] cardNum=new int [data.length];
 
         for(int i=0;i<data.length;i++){
 
-            int cardNum=data[i]%13;
+             cardNum[i]=data[i]%13;
 
-            data[i]=cardNum;
+
 
         }
-        Arrays.sort(data);
+        Arrays.sort(cardNum);
         int d1 = 1;
 
         boolean ans=true;
-        for(int i=0;i<data.length;i++){
+        for(int i=0;i<cardNum.length;i++){
 
 
-            for (int j=i+1;j<data.length;j++){
-                d1=Math.abs(data[i]-data[j]);
+            for (int j=i+1;j<cardNum.length;j++){
+                d1=Math.abs(cardNum[i]-cardNum[j]);
                 if(d1==1){break;}
                 else {ans=false;}
 
@@ -77,9 +95,36 @@ public class problem4Q2 {
         }
         for(int i=0;i<data.length;i++){
             for(int j=i+1;j<data.length;j++)
-            if(cardFlower[i]!=cardFlower[j]){Ans=false;}
+            if(cardFlower[i]!=cardFlower[j]){
+                Ans=false;
+
+            }
 
         }
+        return Ans;
+    }
+    public static char Apair(int [] data){
+        int [] cardNum=new int [data.length];
+        int [] Num=new int[14];
+        int num;
+        char Ans = 0;
+        for(int i=0;i<data.length;i++){
 
+            cardNum[i]=data[i]%13;
+        }
+        for(int j=0;j<cardNum.length;j++){
+            num=cardNum[j];
+            Num[num]+=1;
+        }
+        for(int k=0;k<Num.length;k++){
+            if(Num[k]>=4){
+                Ans='A';
+            }else if(Num[k]==3){
+                Ans='B';
+            }else if(Num[k]==2){
+                Ans='C';
+            }
+        }
+        return Ans;
     }
 }
