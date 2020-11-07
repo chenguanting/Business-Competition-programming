@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.*;
 import java.util.jar.JarOutputStream;
+<<<<<<< HEAD
 
 //1.使用陣列排序Array.sort方法
 public class problem4Q2 {
@@ -21,12 +22,35 @@ public class problem4Q2 {
             int cards[][] = new int[5][14];//總共有 四種花色 13個數字 為了以1開始 故增加一個容量
 
             //23-29行-將卡牌依序存入cards[][]
+=======
+//Array.sort
+public class problem4Q2 {
+    public static void main(String[] args) throws IOException {
+
+        File file=new File("in1.txt");
+        Scanner input=new Scanner(file);
+        int testGroup=Integer.parseInt(input.nextLine());
+        while (testGroup>0) {
+            String [] testData=input.nextLine().split("(\\s|\\n)+");
+            int [] TestData=new int [testData.length];
+            for(int k=0;k<testData.length;k++){
+                TestData[k]=Integer.parseInt(testData[k]);
+            }
+
+
+
+            int num = 1;
+            int cards[][] = new int[5][14];
+
+
+>>>>>>> 9e4fd6f59d0e36001db8a514fdae01129b4b1065
             for (int i = 1; i <= cards.length - 1; i++) {
                 for (int j = 1; j <= cards[i].length - 1; j++) {
                     cards[i][j] = num;
                     num++;
                 }
             }
+<<<<<<< HEAD
             /*31-66行 為判斷卡牌類型
             Shun()判斷順子 TongHuaShun()判斷同花順 同花順的前提是順子要為true
             也就是順子為先決條件，如果排序後公差是1表示數字連續，然後花色又一樣，就
@@ -68,6 +92,24 @@ public class problem4Q2 {
                     default: {
                         output.println("雜牌");
                     }
+=======
+            if(Shun(TestData)==true) {//if ans==true 判斷tonghuashun
+
+              if( TongHuaShun(TestData)==true){
+                  System.out.println("同花順");
+              }else {
+                  System.out.println("順子");
+              }
+            }
+            char Ans=Apair(TestData);
+            if(Ans!=0) {
+                if (Ans == 'A') {
+                    System.out.println("四條");
+                } else if (Ans == 'B') {
+                    System.out.println("三條");
+                } else {
+                    System.out.println("一對");
+>>>>>>> 9e4fd6f59d0e36001db8a514fdae01129b4b1065
                 }
             }
             testGroup--;
@@ -75,6 +117,7 @@ public class problem4Q2 {
 
 
     }
+<<<<<<< HEAD
     //順子邏輯- 1.將卡牌內容%13算出對應的數字部分 2.排序 3.計算公差是否為1
     public static boolean Shun(int[] data) {
         int[] cardNum = new int[data.length];
@@ -118,10 +161,61 @@ public class problem4Q2 {
                 if (cardFlower[i] != cardFlower[j]) {
                     Ans = false;
                 }
+=======
+
+    public static boolean Shun(int [] data)
+    {
+        int [] cardNum=new int [data.length];
+
+        for(int i=0;i<data.length;i++){
+
+             cardNum[i]=data[i]%13;
+
+
+
+        }
+        Arrays.sort(cardNum);
+        int d1 = 1;
+
+        boolean ans=true;
+        for(int i=0;i<cardNum.length;i++){
+
+
+            for (int j=i+1;j<cardNum.length;j++){
+                d1=Math.abs(cardNum[i]-cardNum[j]);
+                if(d1==1){break;}
+                else {ans=false;}
+
+
+            }
+
+
+        }
+        return ans;
+
+
+    }
+    public static boolean TongHuaShun(int [] data){
+        boolean Ans=true;
+        int [] cardFlower=new int [data.length];
+
+        for(int i=0;i<data.length;i++){
+
+            cardFlower[i]=data[i]/13;
+
+        }
+        for(int i=0;i<data.length;i++){
+            for(int j=i+1;j<data.length;j++)
+            if(cardFlower[i]!=cardFlower[j]){
+                Ans=false;
+
+            }
+>>>>>>> 9e4fd6f59d0e36001db8a514fdae01129b4b1065
 
         }
         return Ans;
     }
+<<<<<<< HEAD
     /*剩餘卡牌邏輯-cardNum存卡牌數字
       Num存入每個數字出現的頻率
       使用int變數來判斷該數字出現幾次
@@ -169,3 +263,30 @@ public class problem4Q2 {
         output.close();
     }
 }
+=======
+    public static char Apair(int [] data){
+        int [] cardNum=new int [data.length];
+        int [] Num=new int[14];
+        int num;
+        char Ans = 0;
+        for(int i=0;i<data.length;i++){
+
+            cardNum[i]=data[i]%13;
+        }
+        for(int j=0;j<cardNum.length;j++){
+            num=cardNum[j];
+            Num[num]+=1;
+        }
+        for(int k=0;k<Num.length;k++){
+            if(Num[k]>=4){
+                Ans='A';
+            }else if(Num[k]==3){
+                Ans='B';
+            }else if(Num[k]==2){
+                Ans='C';
+            }
+        }
+        return Ans;
+    }
+}
+>>>>>>> 9e4fd6f59d0e36001db8a514fdae01129b4b1065
