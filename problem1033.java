@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+<<<<<<< HEAD
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -19,6 +20,19 @@ public class problem1033 {
                     num++;//cards[1][1]=1..2..3..4
                 }
             }用不到*/
+=======
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class problem1033 {
+    public static void Logic(String filename, PrintWriter output) throws FileNotFoundException {
+        for (int i = 1; i < 3; i++) {
+
+            File file = new File(filename);
+            Scanner input = new Scanner(file);
+>>>>>>> 3dfe82e2d83eefccde7302c8debee98bac252596
             int testGroup = Integer.parseInt(input.nextLine());
             while (testGroup > 0) {
                 String[] testData = input.nextLine().split(" ");
@@ -26,6 +40,7 @@ public class problem1033 {
                 for (int k = 0; k < testData.length; k++) {
                     TestData[k] = Integer.parseInt(testData[k]);//TestData為轉換int後的值
                 }
+<<<<<<< HEAD
                 Queue queue = new LinkedList();
                 for (int g = 0; g < TestData.length; g++) {
                     queue.offer(TestData[g]);
@@ -86,6 +101,58 @@ public class problem1033 {
             }
 
 
+=======
+               //Queue
+
+
+                int num = 1;
+                int cards[][] = new int[5][14];
+                for (int j = 1; j <= cards.length - 1; j++) {
+                    for (int k = 1; k <= cards[i].length - 1; k++) {
+                        cards[j][k] = num;
+                        num++;//cards[1][1]=1..2..3..4
+                    }
+                }
+                if (Shun(TestData) == true) {
+
+                    if (TongHuaShun(TestData) == true) {
+                        output.println("同花順");
+                    } else {
+                        output.println("順子");
+                    }
+                } else {
+                    char Ans = Apair(TestData);
+
+                    switch (Ans) {
+                        case 'A': {
+                            output.println("四條");
+                            break;
+                        }
+                        case 'B': {
+                            output.println("三條");
+                            break;
+                        }
+                        case 'C': {
+                            output.println("葫蘆");
+                            break;
+                        }
+                        case 'D': {
+                            output.println("兩對");
+                            break;
+                        }
+                        case 'E': {
+                            output.println("一對");
+                            break;
+                        }
+                        default: {
+                            output.println("雜牌");
+                        }
+                    }
+
+                }
+            }
+        }
+>>>>>>> 3dfe82e2d83eefccde7302c8debee98bac252596
     }
 
     public static void main(String[] args) throws FileNotFoundException {
@@ -188,4 +255,8 @@ public class problem1033 {
     }
 
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3dfe82e2d83eefccde7302c8debee98bac252596
