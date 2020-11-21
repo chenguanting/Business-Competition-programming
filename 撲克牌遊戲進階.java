@@ -1,17 +1,24 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class problem1033 {
     public static void Logic(String filename, PrintWriter output) throws FileNotFoundException {
-        for (int i = 1; i < 3; i++) {
 
             File file = new File(filename);
             Scanner input = new Scanner(file);
+            int[] cardArray = new int[5];
+            ArrayList score = new ArrayList();
+            /*int num = 1;
+            int cards[][] = new int[5][14];
+            for (int j = 1; j <= cards.length - 1; j++) {
+                for (int k = 1; k <= cards[j].length - 1; k++) {
+                    cards[j][k] = num;
+                    num++;//cards[1][1]=1..2..3..4
+                }
+            }用不到*/
             int testGroup = Integer.parseInt(input.nextLine());
             while (testGroup > 0) {
                 String[] testData = input.nextLine().split(" ");
@@ -19,56 +26,66 @@ public class problem1033 {
                 for (int k = 0; k < testData.length; k++) {
                     TestData[k] = Integer.parseInt(testData[k]);//TestData為轉換int後的值
                 }
-               //Queue
-
-
-                int num = 1;
-                int cards[][] = new int[5][14];
-                for (int j = 1; j <= cards.length - 1; j++) {
-                    for (int k = 1; k <= cards[i].length - 1; k++) {
-                        cards[j][k] = num;
-                        num++;//cards[1][1]=1..2..3..4
-                    }
+                Queue queue = new LinkedList();
+                for (int g = 0; g < TestData.length; g++) {
+                    queue.offer(TestData[g]);
                 }
-                if (Shun(TestData) == true) {
+                int route=queue.size();
+                while (route>0) {
 
-                    if (TongHuaShun(TestData) == true) {
-                        output.println("同花順");
+                    int temp;
+                    for (int e = 0; e < queue.size() - 1; e++) {
+                        temp = (int) queue.poll();
+                        cardArray[e] = temp;
+                        queue.offer(temp);
+                    }
+
+
+
+                    if (Shun(cardArray) == true) {
+
+                        if (TongHuaShun(cardArray) == true) {
+                            score.add(7);
+                        } else {
+                            score.add(4);
+                        }
                     } else {
-                        output.println("順子");
-                    }
-                } else {
-                    char Ans = Apair(TestData);
+                        char Ans = Apair(cardArray);
 
-                    switch (Ans) {
-                        case 'A': {
-                            output.println("四條");
-                            break;
+                        switch (Ans) {
+                            case 'A': {
+                                score.add(6);
+                                break;
+                            }
+                            case 'B': {
+                                score.add(3);
+                                break;
+                            }
+                            case 'C': {
+                                score.add(5);
+                            }
+                            case 'D': {
+                                score.add(2);
+                                break;
+                            }
+                            case 'E': {
+                                score.add(1);
+                                break;
+                            }
+                            default: {
+                                score.add(0);
+                            }
                         }
-                        case 'B': {
-                            output.println("三條");
-                            break;
-                        }
-                        case 'C': {
-                            output.println("葫蘆");
-                            break;
-                        }
-                        case 'D': {
-                            output.println("兩對");
-                            break;
-                        }
-                        case 'E': {
-                            output.println("一對");
-                            break;
-                        }
-                        default: {
-                            output.println("雜牌");
-                        }
-                    }
 
+                    }
+                route--;
                 }
+                output.println(Collections.max(score));
+                score.clear();
+                testGroup--;
             }
-        }
+
+
     }
 
     public static void main(String[] args) throws FileNotFoundException {
