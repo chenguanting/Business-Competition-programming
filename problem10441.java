@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class problem10441 {
     public static void main(String[] args) throws FileNotFoundException {
         PrintWriter output=new PrintWriter("out.txt");
-        for(int i=1;i<2;i++) {
+        for(int i=1;i<3;i++) {
             String filename = String.format("in%d.txt", i);
             File file=new File(filename);
             Scanner input=new Scanner(file);
@@ -22,10 +22,11 @@ public class problem10441 {
                 }//轉換int
                 Btree bt=new Btree(arrayList);
                 //bt.Print();
-                bt.printPostOrder();
+                bt.printPostOrder(output);
                 groupNum--;
             }
         }
+        output.close();
     }
 }
 class TreeNode{  //樹節點類別
@@ -87,15 +88,15 @@ class Btree{
             ptr=ptr.right;
         }
     }
-    public void postOrder(TreeNode ptr){
+    public void postOrder(TreeNode ptr,PrintWriter output){
         if(ptr!=null){
-            postOrder(ptr.left);
-            postOrder(ptr.right);
-            System.out.print(ptr.data+" ");
+            postOrder(ptr.left,output);
+            postOrder(ptr.right,output);
+            output.print(ptr.data+" ");
         }
     }
-    public void printPostOrder(){
-        postOrder(head);
-        System.out.println();
+    public void printPostOrder(PrintWriter output){
+        postOrder(head,output);
+        output.println();
     }
 }
