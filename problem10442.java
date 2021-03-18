@@ -2,8 +2,13 @@ import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+<<<<<<< HEAD
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+=======
+import java.util.Arrays;
+import java.util.Scanner;
+>>>>>>> a47796bdaaee97ee664eb762f5d854baccce9f74
 
 public class problem10442 {
     public static void main(String[] args) throws FileNotFoundException {
@@ -12,6 +17,7 @@ public class problem10442 {
             String filename = String.format("in%d.txt", i);
             File file = new File(filename);
             Scanner input = new Scanner(file);
+<<<<<<< HEAD
             Enter(output, input);
         }
         output.close();
@@ -66,10 +72,48 @@ public class problem10442 {
             }
             EdgeList e1=new EdgeList(map.size()+1,edge);
             //e1.minSpanTree();
+=======
+            Enter(output,input);
+        }
+        output.close();
+    }
+    public static void Enter(PrintWriter output,Scanner input){
+
+        int DataNum=Integer.parseInt(input.nextLine());
+        while (DataNum>1){
+
+            String [] Line=input.nextLine().split(",| ");
+
+            //for(int i=0;i<Line.length;i++) System.out.println(Line[i]);測試用
+
+            int LineLen=Line.length;//以第一題來說=30
+            int Group=LineLen/3;
+            String [][] vertex=new String[Group][3];
+            int len=0;
+            for(int i=0;i<vertex.length;i++){
+                for(int j=0;j<vertex[i].length;j++){
+                    vertex[i][j]=Line[len];
+                    if(len<LineLen) len++;
+                }
+            }
+            Arrays.sort(vertex, new java.util.Comparator<String[]>() {
+                @Override
+                public int compare(String[] o1, String[] o2) {
+                    return Integer.compare(Integer.parseInt(o1[2]),Integer.parseInt(o2[2]));
+                }
+            });
+            for(int i=0;i<vertex.length;i++){
+                for(int j=0;j<vertex[i].length;j++){
+                    System.out.print(vertex[i][j]);
+                }
+                System.out.println();
+            }
+>>>>>>> a47796bdaaee97ee664eb762f5d854baccce9f74
 
             DataNum--;
         }
     }
+<<<<<<< HEAD
 
 
 }
@@ -138,3 +182,6 @@ class EdgeList{
 
 
 
+=======
+}
+>>>>>>> a47796bdaaee97ee664eb762f5d854baccce9f74
