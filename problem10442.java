@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.Arrays;
 import java.util.Scanner;
 >>>>>>> a47796bdaaee97ee664eb762f5d854baccce9f74
-
+//這是合併後檔案
 public class problem10442 {
     public static void main(String[] args) throws FileNotFoundException {
         PrintWriter output = new PrintWriter("output.txt");
